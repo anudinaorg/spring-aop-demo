@@ -3,12 +3,19 @@
  */
 package com.ado.springaop.domain;
 
+import java.util.logging.Logger;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ado.springaop.exceptions.EmployerNotFoundException;
+
 /**
  * @author Administrator
  *
  */
 public class Employer {
-
+	private final static Logger LOGGER = Logger.getLogger(Employer.class.getName()); 
+	
 	private int emplId;
 	private String empFirstName;
 	private String empLastName;
@@ -75,5 +82,22 @@ public class Employer {
 		this.zipCode = zipCode;
 	}
 	
+	/**
+	 * 
+	 */
+	public void printEmployerDetails()
+	{
+		LOGGER.info(":::::"+ToStringBuilder.reflectionToString(this));
+	}
 	
+	/**
+	 * 
+	 */
+	public void printEmployerAddress(){
+		LOGGER.info(":::::"+this.getEmpAddress()+this.getZipCode());
+	}
+	
+	public void printEmployerException() throws EmployerNotFoundException{
+		throw new EmployerNotFoundException("TEST");
+	}
 }

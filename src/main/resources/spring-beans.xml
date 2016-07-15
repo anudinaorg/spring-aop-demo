@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="employer" class="com.ado.springaop.domain.Employer">
+		<property name="emplId" value="250625" />
+		<property name="empFirstName" value="Anand" />
+		<property name="empLastName" value="Badiger" />
+		<property name="empAddress" value="15420 Livignston Ave, Apt 301, Lutz Florida" />
+		<property name="zipCode" value="33559" />
+	</bean>
+
+	<bean id="beforeHighJack" class="com.ado.advices.BeforeHighJack" />
+	<bean id="afterAdvice" class="com.ado.advices.AfterAdvice" />
+    <bean id="aroundAdvice" class="com.ado.advices.AroundAdvice" />
+     <bean id="afterThrowingAdvice" class="com.ado.advices.AfterThrowingAdvice" />
+	<bean id="employerProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+		<property name="target" ref="employer" />
+
+		<property name="interceptorNames">
+			<list>
+				<value>afterThrowingAdvice</value>
+			</list>
+		</property>
+	</bean>
+</beans>
